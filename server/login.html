@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eat Around - Sign in</title>
+  <link rel="stylesheet" href="./login.css" />
+</head>
+<body>
+  <div class="header-v2">
+    <div class="brand">Eat Around</div>
+    <img class="logo" src="LOGO.png" alt="Site logo" />
+  </div>
+  <div class="app">
+    <main class="card" role="main" aria-labelledby="title">
+      <h1 id="title">Sign in</h1>
+      <p class="sub">Enter your username and password</p>
+
+      <form id="loginForm" method="post" action="/api/auth/login" novalidate>
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username" placeholder="yourusername" required />
+          <div id="usernameError" class="error" aria-live="polite"></div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="********" required />
+          <div id="passwordError" class="error" aria-live="polite"></div>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Sign in</button>
+          <a id="forgotLink" class="secondary-btn" href="forget.html" role="button">Forgot password</a>
+          <div id="formNotice" class="notice" aria-live="polite"></div>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script defer src="./login.js"></script>
+</body>
+</html>
