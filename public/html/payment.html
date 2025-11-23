@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --fg: #f1f5f9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .banner {
+      flex: 0 0 30vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #0d6efd, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gallery {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      height: 70vh;
+    }
+    .tile {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b1220;
+      padding: 12px;
+    }
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .tile:hover {
+      transform: scale(1.02);
+      filter: brightness(1.05);
+    }
+    .tile.selected {
+      outline: 3px solid #22c55e;
+      outline-offset: -3px;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e2e8f0;
+      padding: 12px 18px;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="banner">Payment way</div>
+  <div class="gallery">
+    <div class="tile" data-action="pay">
+      <img src="../assets/WeChat-Pay.png" alt="WeChat Pay" />
+    </div>
+    <div class="tile" data-action="pay">
+      <img src="../assets/OIP.webp" alt="Alternate pay" />
+    </div>
+  </div>
+  <div style="padding: 16px; text-align: center;">
+    <button id="payButton" style="padding: 12px 24px; font-size: 18px; border: none; border-radius: 8px; background: #22c55e; color: #0d1117; cursor: pointer;">
+      Pay
+    </button>
+  </div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script>
+    const API_BASE =
+      window.location.protocol === 'file:' || window.location.origin === 'null'
+        ? 'http://localhost:3000'
+        : window.location.origin;
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 1500);
+    }
+
+    let hasSelection = false;
+
+    async function handlePay() {
+      if (!hasSelection) {
+        showToast('Please choose a payment method.');
+        return;
+      }
+      showToast('Processing payment...');
+      try {
+        const res = await fetch(`${API_BASE}/api/orders`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || 'Payment failed');
+        }
+        showToast('Pay success. Returning home...');
+        setTimeout(() => (window.location.href = '/html/new hom page 3.html'), 800);
+      } catch (err) {
+        console.error('Payment error', err);
+        showToast(err.message || 'Payment failed');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.tile').forEach((tile) => {
+        tile.addEventListener('click', () => {
+          tile.classList.toggle('selected');
+          hasSelection = Array.from(document.querySelectorAll('.tile')).some((t) =>
+            t.classList.contains('selected')
+          );
+        });
+      });
+      document.getElementById('payButton').addEventListener('click', handlePay);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eat Around - Home</title>
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+    <header class="header">
+        <div class="company-title">Eat Around</div>
+        <div class="header-buttons">
+            <button class="btn location-btn" type="button">Change location</button>
+            <button class="btn login-btn" type="button">Sign in</button>
+        </div>
+    </header>
+    
+    <div class="category-scroll-container">
+        <div class="category-scroll" id="categoryScroll"></div>
+    </div>
+    
+    <main class="main-content">
+        <div class="foods-container" id="foodsContainer">
+            <h2 class="section-title" id="foodCategoryTitle">Menu</h2>
+            <div class="foods-grid" id="foodsGrid"></div>
+        </div>
+    </main>
+    
+    <footer class="footer-buttons">
+        <button class="footer-btn" type="button" id="cartBtn">
+            <span>[Cart]</span> Cart
+        </button>
+        <button class="footer-btn" type="button" id="payBtn">
+            <span>[Pay]</span> Pay
+        </button>
+    </footer>
+
+    <div class="location-modal" id="locationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Choose location</div>
+                <button class="close-btn" id="closeModal" aria-label="Close">&times;</button>
+            </div>
+            <input type="text" class="location-input" id="locationInput" placeholder="Enter your location...">
+            <div class="current-location" id="currentLocation">Current location: not set</div>
+            <div class="location-suggestions" id="locationSuggestions">
+                <div class="suggestion-item" data-location="Hong Kong">Hong Kong</div>
+                <div class="suggestion-item" data-location="Taipei">Taipei</div>
+                <div class="suggestion-item" data-location="Tokyo">Tokyo</div>
+                <div class="suggestion-item" data-location="Seoul">Seoul</div>
+                <div class="suggestion-item" data-location="Beijing">Beijing</div>
+                <div class="suggestion-item" data-location="Shanghai">Shanghai</div>
+                <div class="suggestion-item" data-location="Shenzhen">Shenzhen</div>
+            </div>
+            <div class="modal-actions">
+                <button class="cancel-btn" id="cancelLocation" type="button">Cancel</button>
+                <button class="confirm-btn" id="confirmLocation" type="button">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Your cart</div>
+                <button class="close-btn" id="closeCart" aria-label="Close">&times;</button>
+            </div>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-total" id="cartTotal">Total: $0.00</div>
+            <div class="modal-actions">
+                <button class="cancel-btn" id="cancelCart" type="button">Cancel</button>
+                <button class="confirm-btn" id="confirmCart" type="button">Confirm</button>
+            </div>
+            <div id="cartNotice" class="notice" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <div class="cart-modal" id="ordersModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Your orders</div>
+                <button class="close-btn" id="closeOrders" aria-label="Close">&times;</button>
+            </div>
+            <div id="ordersList" class="cart-items"></div>
+            <div class="cart-total" id="ordersTotal">Grand total: $0.00</div>
+            <div class="modal-actions">
+                <button class="confirm-btn" id="ordersPay" type="button">Pay</button>
+            </div>
+            <div id="ordersNotice" class="notice" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="../js/home.js"></script>
+</body>
+</html>

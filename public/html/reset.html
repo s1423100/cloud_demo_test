@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eat Around - Reset password</title>
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+  <div class="header-v2">
+    <div class="brand">Eat Around</div>
+    <img class="logo" src="../assets/LOGO.png" alt="Site logo" />
+  </div>
+  <div class="app">
+    <main class="card" role="main" aria-labelledby="title">
+      <h1 id="title">Reset password</h1>
+      <p class="sub">Enter your new password. This page opens after recovery answers are approved.</p>
+
+      <form id="resetForm" method="post" action="#" novalidate>
+        <div class="field">
+          <label for="newPassword">New password</label>
+          <input id="newPassword" name="newPassword" type="password" autocomplete="new-password" placeholder="Enter new password" required />
+          <div id="newPwError" class="error" aria-live="polite"></div>
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirm new password</label>
+          <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Confirm new password" required />
+          <div id="confirmPwError" class="error" aria-live="polite"></div>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Reset password</button>
+          <div id="formNotice" class="notice" aria-live="polite"></div>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script defer src="../js/reset-client.js"></script>
+</body>
+</html>
